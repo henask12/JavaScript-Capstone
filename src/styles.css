@@ -29,6 +29,14 @@ nav ul li a {
   color: #333;
 }
 
+#logo {
+  background-image: url('./assests/new.jpg');
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+  border-radius: 50px;
+}
+
 footer {
   background-color: #333;
   color: #fff;
@@ -44,4 +52,79 @@ footer {
 .comment-button,
 .reserve-button {
   margin-top: 10px;
+}
+
+.item img {
+  border-radius: 10px;
+  width: 250px;
+}
+
+.div-title i {
+  font-size: 1.2em;
+}
+
+.div-title i:hover {
+  cursor: pointer;
+}
+
+.items-buttons button {
+  padding: 10px 20px;
+  background-color: antiquewhite;
+  color: black;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.items-buttons button:hover {
+  cursor: pointer;
+}
+
+#items-container {
+  display: grid;
+  grid-template-columns: repeat(4, 22%);
+  gap: 2rem;
+  justify-content: center;
+  justify-items: center;
+  margin-bottom: 50px;
+}
+
+.items-container,
+.items-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.div-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.items-buttons {
+  align-items: center;
+}
+
+.likes-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media only screen and (max-width: 1440px) {
+  #items-container {
+    grid-template-columns: repeat(3, 30%);
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  #items-container {
+    grid-template-columns: repeat(2, 45%);
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  #items-container {
+    grid-template-columns: repeat(1, 90%);
+  }
 }

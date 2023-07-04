@@ -5,6 +5,7 @@ const display = () => {
     const url = "https://api.tvmaze.com/shows";
 
     fetchData(url).then((data) => {
+        debugger;
         // Sort the data based on rating average in descending order
         data.sort((a, b) => b.rating.average - a.rating.average);
 
@@ -17,11 +18,11 @@ const display = () => {
             const itemElement = createItemElement(item);
 
             // Create a new column for each item
-            const columnElement = document.createElement("div");
-            columnElement.classList.add("col-md-4");
-            columnElement.appendChild(itemElement);
+            // const columnElement = document.createElement("div");
+            // columnElement.classList.add("col-md-4");
+            itemsContainer.appendChild(itemElement);
 
-            itemsContainer.appendChild(columnElement);
+            // itemsContainer.appendChild(columnElement);
         });
     });
 };
