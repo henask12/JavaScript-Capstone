@@ -36,23 +36,12 @@ footer {
   text-align: center;
 }
 
-.item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+.like-button {
+  margin-left: 80px;
+  margin-top: 10px;
 }
 
-.item img {
-  width: 100px;
-  height: 100px;
-  margin-right: 10px;
-}
-
-.item-title {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.button {
-  margin-right: 10px;
+.comment-button,
+.reserve-button {
+  margin-top: 10px;
 }
