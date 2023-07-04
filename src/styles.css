@@ -41,7 +41,37 @@ footer {
   margin-top: 10px;
 }
 
-.comment-button,
-.reserve-button {
+.popup-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-close {
+  align-self: flex-end;
+  background-color: #ccc;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.comments-section {
   margin-top: 10px;
+}
+
+.comments-section div {
+  margin-bottom: 5px;
 }
