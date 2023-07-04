@@ -35,3 +35,24 @@ footer {
   padding: 20px;
   text-align: center;
 }
+
+.item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.item img {
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+}
+
+.item-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.button {
+  margin-right: 10px;
+}
