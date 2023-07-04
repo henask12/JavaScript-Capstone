@@ -1,11 +1,15 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
+
 import { fetchData } from './api.js';
 import showComments from './popUp.js';
 
 export const createItemElement = (item) => {
   const itemElement = document.createElement('div');
   itemElement.className = 'item';
+
+  const { id } = item;
+  itemElement.id = `${id}`;
 
   const imageDiv = document.createElement('div');
   const imageElement = document.createElement('img');
@@ -33,6 +37,11 @@ export const createItemElement = (item) => {
   commentButton.className = 'comment-button';
   commentButton.textContent = 'Comments';
   buttonsDivComment.appendChild(commentButton);
+
+  // Add event listener to comment button
+  commentButton.addEventListener('click', async () => {
+    await showComments(id);
+  });
 
   const buttonsDivReserve = document.createElement('div');
   buttonsDivReserve.className = 'item-buttons';

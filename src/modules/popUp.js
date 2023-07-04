@@ -1,6 +1,7 @@
 import { fetchData } from './api.js';
 
 const showComments = (item) => {
+
   const popupContainer = document.createElement('div');
   popupContainer.classList.add('popup-container');
 
@@ -19,14 +20,15 @@ const showComments = (item) => {
   commentsSection.classList.add('comments-section');
   popupContent.appendChild(commentsSection);
 
-  const commentsUrl = `https://api.tvmaze.com/shows/${item.id}/comments`;
+  const commentsUrl = `https://api.tvmaze.com/shows/${item}`;
+  // const involvmentUrl = `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/c26WXJgsOY60FiNtcTNS/comments`
   fetchData(commentsUrl)
     .then((comments) => {
-      comments.forEach((comment) => {
+      
         const commentElement = document.createElement('div');
-        commentElement.textContent = comment.text;
+        commentElement.textContent = comments.name;
         commentsSection.appendChild(commentElement);
-      });
+  
 
       popupContainer.appendChild(popupContent);
       const mainElement = document.querySelector('main');
