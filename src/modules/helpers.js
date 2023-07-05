@@ -5,55 +5,48 @@ import { fetchData } from './api.js';
 import showComments from './popUp.js';
 
 export const createItemElement = (item) => {
-  const itemElement = document.createElement('div');
-  itemElement.className = 'item';
+    const itemElement = document.createElement("div");
+    itemElement.className = "item";
 
-  const { id } = item;
-  itemElement.id = `${id}`;
+    const { id } = item;
+    itemElement.id = `${id}`;
+    debugger;
 
-  const imageDiv = document.createElement('div');
-  const imageElement = document.createElement('img');
-  imageElement.src = item.image ? item.image.medium : '';
-  imageDiv.appendChild(imageElement);
-  itemElement.appendChild(imageDiv);
+    const imageElement = document.createElement("img");
+    imageElement.src = item.image ? item.image.medium : "";
+    itemElement.appendChild(imageElement);
 
-  const itemDetailsDiv = document.createElement('div');
-  itemDetailsDiv.className = 'item-details';
+    const titleElement = document.createElement("div");
+    titleElement.classList.add("div-title");
+    titleElement.innerHTML = `
+    <h2>${item.name}</h2>
+    <div class="likes-container">
+      <i class="fa-solid fa-heart"></i>
+      <span>${item.likes} likes</span>
+    </div>
+  `;
+    itemElement.appendChild(titleElement);
 
-  const titleElement = document.createElement('span');
-  titleElement.className = 'item-title';
-  titleElement.textContent = item.name;
-  itemDetailsDiv.appendChild(titleElement);
+    const buttonsDiv = document.createElement("span");
+    buttonsDiv.className = "item-buttons";
 
-  const likeButton = document.createElement('button');
-  likeButton.className = 'like-button';
-  likeButton.textContent = 'Like';
-  itemDetailsDiv.appendChild(likeButton);
+    buttonsDiv.innerHTML = `
+      &nbsp; 
+      <button id="btn-comment" class="comment-button"><i class="fa-regular fa-comment"></i> Comment</button>
+      &nbsp; 
+      <button id="reserve-button"><i class="fa-regular fa-clock"></i> Reserve</button>`;
 
-  const buttonsDivComment = document.createElement('div');
-  buttonsDivComment.className = 'item-buttons';
+    itemElement.append(buttonsDiv);
+    // itemElement.appendChild(itemDetailsDiv);
 
-  const commentButton = document.createElement('button');
-  commentButton.className = 'comment-button';
-  commentButton.textContent = 'Comments';
-  buttonsDivComment.appendChild(commentButton);
+    const commentButton = document.getElementById('btn-comment');
+    debugger;
+      // Add event listener to comment buttonx
 
-  // Add event listener to comment button
-  commentButton.addEventListener('click', async () => {
-    await showComments(id);
-  });
+      const btnComment = itemElement.querySelector("#btn-comment");
+btnComment.addEventListener("click", () => {
+   showComments(id);
+});
 
-  const buttonsDivReserve = document.createElement('div');
-  buttonsDivReserve.className = 'item-buttons';
-
-  const reservationButton = document.createElement('button');
-  reservationButton.className = 'reserve-button';
-  reservationButton.textContent = 'Reservations';
-  buttonsDivReserve.appendChild(reservationButton);
-
-  itemDetailsDiv.appendChild(buttonsDivComment);
-  itemDetailsDiv.appendChild(buttonsDivReserve);
-  itemElement.appendChild(itemDetailsDiv);
-
-  return itemElement;
+    return itemElement;
 };
