@@ -10,19 +10,14 @@ const display = () => {
         data.sort((a, b) => b.rating.average - a.rating.average);
 
         // Limit the data to the top 6 items
-        const topItems = data.slice(0, 15);
+        const topItems = data.slice(0, 16);
 
         const itemsContainer = document.getElementById("items-container");
 
         topItems.forEach((item) => {
             const itemElement = createItemElement(item);
 
-            // Create a new column for each item
-            // const columnElement = document.createElement("div");
-            // columnElement.classList.add("col-md-4");
             itemsContainer.appendChild(itemElement);
-
-            // itemsContainer.appendChild(columnElement);
         });
     });
 };
