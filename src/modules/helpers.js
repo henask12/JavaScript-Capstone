@@ -38,8 +38,6 @@ export const createItemElement = (item) => {
 
     itemElement.append(buttonsDiv);
     // itemElement.appendChild(itemDetailsDiv);
-
-    const commentButton = document.getElementById('btn-comment');
     debugger;
       // Add event listener to comment buttonx
 
