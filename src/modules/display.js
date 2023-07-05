@@ -1,25 +1,28 @@
 import { fetchData } from "./api.js";
-import { createItemElement } from "./helpers.js";
+import { ItemElement } from "./helpers.js";
 
-const display = () => {
-    const url = "https://api.tvmaze.com/shows";
+const display = async () => {
+  const url = "https://api.tvmaze.com/shows";
 
-    fetchData(url).then((data) => {
-        debugger;
-        // Sort the data based on rating average in descending order
-        data.sort((a, b) => b.rating.average - a.rating.average);
+  try {
+    const data = await fetchData(url);
 
-        // Limit the data to the top 6 items
-        const topItems = data.slice(0, 16);
+    // Sort the data based on rating average in descending order
+    data.sort((a, b) => b.rating.average - a.rating.average);
 
-        const itemsContainer = document.getElementById("items-container");
+    // Limit the data to the top 6 items
+    const topItems = data.slice(0, 16);
 
-        topItems.forEach((item) => {
-            const itemElement = createItemElement(item);
+    const itemsContainer = document.getElementById("items-container");
 
-            itemsContainer.appendChild(itemElement);
-        });
-    });
+    for (const item of topItems) {
+      const itemElement = await ItemElement(item);
+
+      itemsContainer.appendChild(itemElement);
+    }
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export default display;
