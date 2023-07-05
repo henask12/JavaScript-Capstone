@@ -75,16 +75,31 @@ const showComments = async (item) => {
   popupContent.appendChild(commentsSection);
 
   const commentsUrl = `https://api.tvmaze.com/shows/${item}`;
+  const commentData = `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/c26WXJgsOY60FiNtcTNS/comments?item_id=${parseInt(item, 10)}`;
 
   try {
     const comments = await fetchData(commentsUrl);
-    console.log(comments);
 
+    const data = await fetchData(commentData);
+
+    console.log(data);
+
+    // eslint-disable-next-line no-unused-vars
+    const commentsContainer = document.getElementById('comments-section');
+    const commentdata = document.createElement('div');
+    commentdata.classList.add('comments-section-data');
+    popupContent.appendChild(commentdata);
+
+    data.forEach((comment) => {
+      const commentElement = createCommentElement(comment);
+      commentdata.appendChild(commentElement);
+    });
     const commentForm = createCommentForm(item, commentsSection);
     popupContent.appendChild(commentForm);
 
     const commentElement = document.createElement('div');
     commentElement.textContent = comments.name;
+    commentElement.classList.add('comment-name');
     commentsSection.appendChild(commentElement);
 
     const imageElement = document.createElement('img');
@@ -95,6 +110,24 @@ const showComments = async (item) => {
     document.body.appendChild(popupContainer);
   } catch (error) {
     console.error('Error fetching comments:', error);
+  }
+  function createCommentElement(comment) {
+    const commentElement = document.createElement('div');
+    commentElement.className = 'comment';
+
+    const usernameElement = document.createElement('span');
+    usernameElement.textContent = comment.username;
+    commentElement.appendChild(usernameElement);
+
+    const dateElement = document.createElement('span');
+    dateElement.textContent = comment.creation_date;
+    commentElement.appendChild(dateElement);
+
+    const commentTextElement = document.createElement('p');
+    commentTextElement.textContent = comment.comment;
+    commentElement.appendChild(commentTextElement);
+
+    return commentElement;
   }
 };
 

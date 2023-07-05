@@ -63,12 +63,13 @@ footer {
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   z-index: 9999;
-  overflow-y: auto
+  overflow-y: auto;
 }
 
 .popup-content {
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
 .popup-close {
@@ -77,12 +78,13 @@ footer {
   color: #fff;
   border: none;
   padding: 5px 10px;
-  border-radius: 3px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
 .popup-close:hover {
   background-color: gray;
+  color: #333;
 }
 
 .comments-section {
@@ -102,19 +104,20 @@ footer {
   color: #fff;
   border: none;
   padding: 5px 10px;
-  border-radius: 3px;
+  border-radius: 5px;
   cursor: pointer;
   width: 50%;
 }
 
 .submit-button:hover {
   background-color: gray;
+  color: #333;
 }
 
 .comment-form {
   display: flex;
   flex-direction: column;
-  border-radius: 3px;
+  border-radius: 5px;
   width: 70%;
   margin-left: 15%;
   margin-top: 10%;
@@ -124,5 +127,16 @@ footer {
 textarea {
   border: none;
   padding: 2%;
-  border-radius: 3px;
+  border-radius: 5px;
+}
+
+.comment {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.comment-name {
+  font-size: 25px;
+  color: #333;
 }
