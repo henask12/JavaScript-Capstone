@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  font-size: 800;
+}
+
 header {
   background-color: #f2f2f2;
   padding: 20px;
@@ -42,11 +48,13 @@ footer {
 }
 
 .popup-container {
+  height: 90%;
+  width: 50%;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
+  background-color: #f2f2f2;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -60,12 +68,16 @@ footer {
 
 .popup-close {
   align-self: flex-end;
-  background-color: #ccc;
+  background-color: #333;
   color: #fff;
   border: none;
   padding: 5px 10px;
   border-radius: 3px;
   cursor: pointer;
+}
+
+.popup-close:hover {
+  background-color: gray;
 }
 
 .comments-section {
@@ -74,4 +86,32 @@ footer {
 
 .comments-section div {
   margin-bottom: 5px;
+}
+
+.submit-button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: gray;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  border-radius: 3px;
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 50%;
+}
+
+textarea {
+  border: none;
+  padding: 2%;
+  border-radius: 3px;
 }
