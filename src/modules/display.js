@@ -10,7 +10,7 @@ const display = () => {
         data.sort((a, b) => b.rating.average - a.rating.average);
 
         // Limit the data to the top 6 items
-        const topItems = data.slice(0, 9);
+        const topItems = data.slice(0, 15);
 
         const itemsContainer = document.getElementById("items-container");
 
