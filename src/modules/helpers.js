@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
 
@@ -15,11 +16,10 @@ export const ItemElement = async (item) => {
 
   let count = 0;
   try {
-    debugger;
     const likesData = await fetchLikes();
 
     // Check if likesData is empty or "No Content"
-    if (!likesData || likesData === "Unexpected end of JSON input" || likesData === "undefined") {
+    if (!likesData || likesData === 'Unexpected end of JSON input' || likesData === 'undefined') {
       count = 0;
     } else {
       // Find the object with the designated id.
@@ -73,8 +73,6 @@ export const ItemElement = async (item) => {
         console.error(error);
       }
     });
-
-
   } catch (error) {
     console.error(error);
   }
