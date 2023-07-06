@@ -56,7 +56,6 @@ const displayComment = (comment, commentsSection) => {
 };
 
 const showComments = async (item) => {
-  debugger;
   const popupContainer = document.createElement('div');
   popupContainer.classList.add('popup-container');
 
@@ -77,32 +76,32 @@ const showComments = async (item) => {
 
   const commentsUrl = `https://api.tvmaze.com/shows/${item}`;
   const commentData = `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/c26WXJgsOY60FiNtcTNS/comments?item_id=${parseInt(item, 10)}`;
-   
+
   try {
     const comments = await fetchData(commentsUrl);
     // console.log(comments);
 
     const data = await fetchData(commentData);
 
-   const commentdata = document.createElement("div");
-   commentdata.classList.add('comments-section-data');
-   popupContent.appendChild(commentdata)
+    const commentdata = document.createElement('div');
+    commentdata.classList.add('comments-section-data');
+    popupContent.appendChild(commentdata);
 
-   
-   if (!data.error) {
-    data.forEach((comment) => {
-      const commentElement = createCommentElement(comment);
-      commentdata.appendChild(commentElement);
-    });
-  } else {
+    if (!data.error) {
+      data.forEach((comment) => {
+        const commentElement = createCommentElement(comment);
+        commentdata.appendChild(commentElement);
+      });
+    } else {
     // Handle the error case, e.g., display an error message
-    console.error("Error fetching comments:", data.error.message);
+      console.error('Error fetching comments:', data.error.message);
     // You can choose to display an error message or handle the error in another way
-  }
+    }
     const commentForm = createCommentForm(item, commentsSection);
     popupContent.appendChild(commentForm);
 
     const commentElement = document.createElement('div');
+    commentElement.className = 'Movie-name';
     commentElement.textContent = comments.name;
     commentsSection.appendChild(commentElement);
 
@@ -116,24 +115,23 @@ const showComments = async (item) => {
     console.error('Error fetching comments:', error);
   }
   function createCommentElement(comment) {
-    const commentElement = document.createElement("div");
-    commentElement.className = "comment";
-  
-    const usernameElement = document.createElement("span");
+    const commentElement = document.createElement('div');
+    commentElement.className = 'comment';
+
+    const usernameElement = document.createElement('span');
     usernameElement.textContent = comment.username;
     commentElement.appendChild(usernameElement);
-  
-    const dateElement = document.createElement("span");
+
+    const dateElement = document.createElement('span');
     dateElement.textContent = comment.creation_date;
     commentElement.appendChild(dateElement);
-  
-    const commentTextElement = document.createElement("p");
+
+    const commentTextElement = document.createElement('p');
     commentTextElement.textContent = comment.comment;
     commentElement.appendChild(commentTextElement);
-  
+
     return commentElement;
   }
-   
 };
 
 const saveComment = async (itemId, name, commentText) => {
