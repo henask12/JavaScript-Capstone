@@ -12,7 +12,7 @@ const display = async () => {
     data.sort((a, b) => b.rating.average - a.rating.average);
 
     // Limit the data to the top 6 items
-    const topItems = data.slice(0, 4);
+    const topItems = data.slice(0, 16);
 
     const itemsContainer = document.getElementById("items-container");
 
