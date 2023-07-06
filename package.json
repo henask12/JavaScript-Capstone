@@ -5,13 +5,16 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "webpack serve --open"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.22.8",
+    "@babel/preset-env": "^7.22.7",
+    "@jest/globals": "^29.6.1",
     "babel-eslint": "^10.1.0",
     "css-loader": "^6.8.1",
     "eslint": "^7.32.0",

@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-console */
-import countComments from '../commentsCounter.js';
+import countComments from './commentsCounter.js';
 
 import { fetchData } from './api.js';
 
