@@ -82,7 +82,7 @@ export const ItemElement = async (item) => {
     loaderElement.classList.remove('class-to-remove');
     setTimeout(() => {
       loaderElement.style.display = 'none';
-    }, 1000);
+    }, 8000);
   }
   return itemElement;
 };
