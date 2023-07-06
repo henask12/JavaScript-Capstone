@@ -61,18 +61,21 @@ footer {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #f2f2f2;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   z-index: 9999;
   overflow-y: auto;
+  background-color: #e0e0e0;
 }
 
 .popup-content {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  border-radius: 5px;
+  background-color: #e0e0e0;
+  padding: 3%;
 }
 
 .popup-close {
@@ -151,7 +154,19 @@ textarea {
 }
 
 .Movie-name {
-  font-size: 25px;
+  font-size: 20px;
+}
+
+.comment-image {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  width: 250px;
+  height: auto;
+  border-radius: 5%;
+  object-fit: cover;
+}
+
+.info-div {
+  font-size: 20px;
 }
 
 .item img {
