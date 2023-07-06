@@ -1,5 +1,5 @@
-import { fetchData } from "./api.js";
-import { ItemElement } from "./helpers.js";
+import { fetchData } from './api.js';
+import { ItemElement } from './helpers.js';
 
 const display = async () => {
   const url = "https://api.tvmaze.com/shows";
@@ -15,11 +15,11 @@ const display = async () => {
 
     const itemsContainer = document.getElementById("items-container");
 
-    for (const item of topItems) {
-      const itemElement = await ItemElement(item);
+    const itemElements = await Promise.all(topItems.map(item => ItemElement(item)));
 
+    itemElements.forEach(itemElement => {
       itemsContainer.appendChild(itemElement);
-    }
+    });
   } catch (error) {
     console.error(error);
   }
