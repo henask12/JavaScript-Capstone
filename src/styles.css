@@ -94,6 +94,11 @@ footer {
   margin-top: 10px;
 }
 
+.comment-counter {
+  text-align: center;
+  font-size: 25px;
+}
+
 .comments-section div {
   margin-bottom: 5px;
   display: flex;

@@ -1,5 +1,7 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-console */
+import countComments from '../commentsCounter.js';
+
 import { fetchData } from './api.js';
 
 const createCommentForm = (itemId, commentsSection) => {
@@ -27,7 +29,6 @@ const createCommentForm = (itemId, commentsSection) => {
   submitButton.className = 'submit-button';
   form.appendChild(submitButton);
 
-  // Manejar el evento de envío del formulario
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const name = nameInput.value;
@@ -79,7 +80,6 @@ const showComments = async (item) => {
 
   try {
     const comments = await fetchData(commentsUrl);
-    // console.log(comments);
 
     const data = await fetchData(commentData);
 
@@ -92,11 +92,19 @@ const showComments = async (item) => {
         const commentElement = createCommentElement(comment);
         commentdata.appendChild(commentElement);
       });
+
+      const commentsCount = countComments(data);
+
+      const commentsCountElement = document.createElement('span');
+      commentsCountElement.textContent = `Total Comments: ${commentsCount}`;
+      commentsCountElement.className = 'comment-counter';
+      popupContent.appendChild(commentsCountElement);
     } else {
     // Handle the error case, e.g., display an error message
       console.error('Error fetching comments:', data.error.message);
     // You can choose to display an error message or handle the error in another way
     }
+
     const commentForm = createCommentForm(item, commentsSection);
     popupContent.appendChild(commentForm);
 
