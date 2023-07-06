@@ -1,6 +1,5 @@
 export const postLikes = async (event) => {
     try {
-        debugger
       return await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/c26WXJgsOY60FiNtcTNS/likes', {
         method: 'POST',
         body: JSON.stringify({
