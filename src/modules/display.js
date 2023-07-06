@@ -21,12 +21,12 @@ const display = async () => {
     itemElements.forEach((itemElement) => {
       itemsContainer.appendChild(itemElement);
     });
-      
-  const likesCount = document.querySelectorAll('.items-count');
 
-  likesCount.forEach((span) => {
-    span.textContent = `(${likesCounter()})`;
-  });
+    const likesCount = document.querySelectorAll('.items-count');
+
+    likesCount.forEach((span) => {
+      span.textContent = `(${likesCounter()})`;
+    });
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error);

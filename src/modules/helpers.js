@@ -76,13 +76,13 @@ export const ItemElement = async (item) => {
     console.error(error);
   }
 
- // Hide or remove the class from the loader element after 1 second
- const loaderElement = document.querySelector('.cont');
- if (loaderElement) {
-   loaderElement.classList.remove('class-to-remove');
-   setTimeout(() => {
-     loaderElement.style.display = 'none';
-   }, 1000);
- }
+  // Hide or remove the class from the loader element after 1 second
+  const loaderElement = document.querySelector('.cont');
+  if (loaderElement) {
+    loaderElement.classList.remove('class-to-remove');
+    setTimeout(() => {
+      loaderElement.style.display = 'none';
+    }, 1000);
+  }
   return itemElement;
 };
