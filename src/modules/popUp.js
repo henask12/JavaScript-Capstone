@@ -115,7 +115,22 @@ const showComments = async (item) => {
 
     const imageElement = document.createElement('img');
     imageElement.src = comments.image ? comments.image.medium : '';
+    imageElement.className = 'comment-image';
     commentElement.appendChild(imageElement);
+
+    const infoDiv = document.createElement('div');
+    infoDiv.className = 'info-div';
+    commentElement.appendChild(infoDiv);
+
+    const languageElement = document.createElement('span');
+    languageElement.className = 'language';
+    languageElement.textContent = `Language: ${comments.language}`;
+    infoDiv.appendChild(languageElement);
+
+    const genresElement = document.createElement('span');
+    genresElement.className = 'genres';
+    genresElement.textContent = `Genres: ${comments.genres.join(', ')}`;
+    infoDiv.appendChild(genresElement);
 
     popupContainer.appendChild(popupContent);
     document.body.appendChild(popupContainer);

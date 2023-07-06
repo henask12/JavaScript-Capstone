@@ -61,18 +61,21 @@ footer {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #f2f2f2;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   z-index: 9999;
   overflow-y: auto;
+  background-color: #e0e0e0;
 }
 
 .popup-content {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  border-radius: 5px;
+  background-color: #e0e0e0;
+  padding: 3%;
 }
 
 .popup-close {
@@ -151,7 +154,19 @@ textarea {
 }
 
 .Movie-name {
-  font-size: 25px;
+  font-size: 20px;
+}
+
+.comment-image {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  width: 250px;
+  height: auto;
+  border-radius: 5%;
+  object-fit: cover;
+}
+
+.info-div {
+  font-size: 20px;
 }
 
 .item img {
@@ -293,4 +308,41 @@ body {
     color: rgb(3, 168, 173);
     transform: scale(1);
   }
+}
+
+.centered-text {
+  margin: 50px;
+  text-align: center;
+}
+
+.cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#logo-img {
+  width: 50px;
+  border-radius: 50%;
+}
+
+.navbar-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

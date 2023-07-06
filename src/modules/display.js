@@ -1,5 +1,6 @@
 import { fetchData } from './api.js';
 import { ItemElement } from './helpers.js';
+import likesCounter from './likesCounter.js';
 
 const display = async () => {
   const url = 'https://api.tvmaze.com/shows';
@@ -20,6 +21,12 @@ const display = async () => {
     itemElements.forEach((itemElement) => {
       itemsContainer.appendChild(itemElement);
     });
+      
+  const likesCount = document.querySelectorAll('.items-count');
+
+  likesCount.forEach((span) => {
+    span.textContent = `(${likesCounter()})`;
+  });
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error);
