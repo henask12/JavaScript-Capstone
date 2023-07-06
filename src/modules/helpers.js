@@ -15,7 +15,6 @@ export const ItemElement = async (item) => {
 
   let count = 0;
   try {
-    debugger;
     const likesData = await fetchLikes();
 
     // Check if likesData is empty or "No Content"
@@ -60,7 +59,6 @@ export const ItemElement = async (item) => {
     });
 
     const heartIcon = itemElement.querySelector('.fa-heart');
-    const likesCount = itemElement.querySelector('.likes-count');
 
     heartIcon.addEventListener('click', async (event) => {
       try {
@@ -78,5 +76,14 @@ export const ItemElement = async (item) => {
   } catch (error) {
     console.error(error);
   }
+
+ // Hide or remove the class from the loader element after 1 second
+ const loaderElement = document.querySelector('.cont');
+ if (loaderElement) {
+   loaderElement.classList.remove('class-to-remove');
+   setTimeout(() => {
+     loaderElement.style.display = 'none';
+   }, 1000);
+ }
   return itemElement;
 };
