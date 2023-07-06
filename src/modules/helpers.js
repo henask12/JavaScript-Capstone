@@ -4,6 +4,7 @@
 import { fetchData } from './api.js';
 import showComments from './popUp.js';
 import { fetchLikes } from './fetchLikes.js';
+import { postLikes } from './postLikes.js';
 
 export const ItemElement = async (item) => {
   const itemElement = document.createElement('div');
@@ -57,6 +58,23 @@ export const ItemElement = async (item) => {
     btnComment.addEventListener('click', () => {
       showComments(id);
     });
+
+    const heartIcon = itemElement.querySelector('.fa-heart');
+    const likesCount = itemElement.querySelector('.likes-count');
+
+    heartIcon.addEventListener('click', async (event) => {
+      try {
+        await postLikes(event);
+        event.target.classList.add('animation-heart');
+        const span = event.target.nextElementSibling;
+        let count = Number(span.textContent.replace('likes', ''));
+        span.textContent = `${count += 1} likes`;
+      } catch (error) {
+        console.error(error);
+      }
+    });
+
+
   } catch (error) {
     console.error(error);
   }

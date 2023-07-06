@@ -266,3 +266,26 @@ body {
 #reserve-button:hover {
   background-color: #e0e0e0;
 }
+
+.animation-heart {
+  animation-name: shape;
+  animation-timing-function: ease-in-out;
+  animation-duration: 0.5s;
+  color: rgb(3, 168, 173);
+}
+
+@keyframes shape {
+  from {
+    color: white;
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  to {
+    color: rgb(3, 168, 173);
+    transform: scale(1);
+  }
+}
