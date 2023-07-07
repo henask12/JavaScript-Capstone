@@ -76,7 +76,7 @@ HTML5, CSS3, Bootstrap, JavaScript, Git and Github
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-Demo link is comming soon!
+ [Live Demo](https://henask12.github.io/JavaScript-Capstone/dist/index.html)   
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -107,7 +107,9 @@ Install this project with:
 
 -Install Node Modules
 
+```sh
 npm install
+```
 
 ### Usage
 
@@ -115,7 +117,9 @@ To run this project, execute the following command:
 
 -Start the development server
 
+```sh
 npm run start
+```
 
 ### Run tests
 
@@ -123,17 +127,17 @@ To run tests, run the following commands:
 
 -HTML linter errors run:
 
-npx hint .
+``` npx hint . ```
 
 -CSS linter errors run:
 
-npx stylelint "**/*.{css,scss}"
+``npx stylelint "**/*.{css,scss}"``
 
 ### Deployment
 
-You can deploy this project using:
+You can deploy this project using: 
 
--Github
+- Github
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -169,7 +173,7 @@ You can deploy this project using:
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](../../issues/).
+Feel free to check the [issues page](https://github.com/henask12/JavaScript-Capstone/issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
