@@ -27,18 +27,17 @@
 - [🤝 Contributing](#contributing)
 - [⭐️ Show your support](#support)
 - [🙏 Acknowledgements](#acknowledgements)
-- [❓ FAQ (OPTIONAL)](#faq)
 - [📝 License](#license)
 
 
 # 📖 [Capstone-Project] <a name="about-project"></a>
 
 
-**[Capstone-Project]** This is a collaborative project where we have applied all the skills obtained throughout the javascript module.
+**[Capstone-Project]** is an application that renders Tv Shows from TVMaze API and also has features like fetching and posting comments and Likes using the Involvment API. This is a collaborative project where we have applied all the skills obtained throughout the javascript module.
 
 ## 🛠 Built With <a name="built-with"></a>
 
-HTML5, CSS3, Bootstrap, JavaScript, Git and Github
+HTML5, CSS3, Bootstrap, JavaScript, Jest, Git, and GitHub
 
 ### Tech Stack <a name="tech-stack"></a>
 
@@ -96,7 +95,7 @@ In order to run this project you need:
 
 - Visual Studio Code installed
 - Npm installed
-- A Github account
+- A GitHub account
 - Git installed
 
 ### Setup
