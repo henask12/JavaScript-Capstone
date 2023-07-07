@@ -437,7 +437,7 @@ body {
   visibility: hidden;
   min-width: 250px;
   margin-left: -125px;
-  background-color: #00c58dc4;
+  background-color: #00cf95c4;
   color: #fff;
   text-align: center;
   border-radius: 2px;
@@ -451,8 +451,8 @@ body {
 
 #snackbar.show {
   visibility: visible;
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  -webkit-animation: fadein 0.5s, fadeout 0.8s 2.5s;
+  animation: fadein 0.5s, fadeout 0.8s 2.5s;
 }
 
 @-webkit-keyframes fadein {

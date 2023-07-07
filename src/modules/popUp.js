@@ -30,6 +30,7 @@ const createCommentForm = (itemId, commentsSection) => {
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
+
     const name = nameInput.value;
     const commentText = commentInput.value;
     const savedComment = await saveComment(itemId, name, commentText);
@@ -45,15 +46,15 @@ const createCommentElement = (comment) => {
   commentElement.className = 'comment';
 
   const usernameElement = document.createElement('span');
-  usernameElement.textContent = comment.username;
+  usernameElement.textContent = comment?.username;
   commentElement.appendChild(usernameElement);
 
   const dateElement = document.createElement('span');
-  dateElement.textContent = comment.creation_date;
+  dateElement.textContent = comment?.creation_date;
   commentElement.appendChild(dateElement);
 
   const commentTextElement = document.createElement('p');
-  commentTextElement.textContent = comment.comment;
+  commentTextElement.textContent = comment?.comment;
   commentElement.appendChild(commentTextElement);
 
   return commentElement;
@@ -62,11 +63,11 @@ const displayComment = (comment, commentsSection) => {
   const commentElement = document.createElement('div');
 
   const usernameElement = document.createElement('strong');
-  usernameElement.textContent = comment.username;
+  usernameElement.textContent = comment?.username;
   commentElement.appendChild(usernameElement);
 
   const textElement = document.createElement('p');
-  textElement.textContent = comment.comment;
+  textElement.textContent = comment?.comment;
   commentElement.appendChild(textElement);
 
   commentsSection.appendChild(commentElement);
@@ -83,7 +84,12 @@ const showComments = async (item) => {
   closeButton.classList.add('popup-close');
   closeButton.textContent = 'Close';
   closeButton.addEventListener('click', () => {
-    popupContainer.remove();
+    let popupContainers = document.querySelectorAll('.popup-container');
+
+    while (popupContainers.length > 0) {
+      popupContainers[0].remove();
+      popupContainers = document.querySelectorAll('.popup-container'); // Re-evaluate the collection
+    }
   });
   popupContent.appendChild(closeButton);
 
@@ -103,12 +109,12 @@ const showComments = async (item) => {
 
   try {
     const comments = await fetchData(commentsUrl);
+
     const data = await fetchData(commentData);
 
     const commentdata = document.createElement('div');
     commentdata.classList.add('comments-section-data');
     popupGrid.appendChild(commentdata);
-
     const pagCom = document.createElement('div');
     pagCom.classList.add('pagination-comment');
     popupContent.appendChild(pagCom);
@@ -141,9 +147,8 @@ const showComments = async (item) => {
       // Insert the commentsCountElement before the comments-section-grid
       popupContent.insertBefore(commentsCountElement, popupGrid);
 
-      // popupContent.appendChild(commentsCountElement);
-
       const commentElements = data.map(createCommentElement);
+
       const totalPages = Math.ceil(commentElements.length / commentsPerPage);
 
       const handlePagination = () => {
@@ -224,6 +229,7 @@ const saveComment = async (itemId, name, commentText) => {
       },
       body: JSON.stringify(commentData),
     });
+
     if (response.ok) {
       const inputName = document.querySelectorAll('.name-input');
       const inputComment = document.querySelectorAll('.comment-input');
@@ -238,17 +244,21 @@ const saveComment = async (itemId, name, commentText) => {
       // displayComment();
       const snackbar = document.getElementById('snackbar');
       snackbar.className = 'show';
+      const text = document.createElement('span');
+
+      text.textContent = 'Comment SuccessFully Added!';
+
+      snackbar.appendChild(text);
       setTimeout(() => {
         snackbar.className = snackbar.className.replace('show', '');
-      }, 3000);
-    }
-
-    if (!response.ok) {
+      }, 10000);
+      showComments(itemId);
+    } else if (!response.ok) {
       throw new Error('Failed to save comment');
     }
 
-    const savedComment = await response.json();
-    return savedComment;
+    // const savedComment = await response.json();
+    // return savedComment;
   } catch (error) {
     console.error('Error saving comment:', error);
     throw error;
