@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/prefer-default-export
-export const fetchLikes = async () => {
+const fetchLikes = async () => {
   try {
     return await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/c26WXJgsOY60FiNtcTNS/likes', {
       method: 'GET',
@@ -11,3 +10,5 @@ export const fetchLikes = async () => {
     return error.message;
   }
 };
+
+export default fetchLikes;

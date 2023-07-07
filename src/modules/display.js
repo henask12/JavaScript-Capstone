@@ -1,5 +1,5 @@
-import { fetchData } from './api.js';
-import { ItemElement } from './helpers.js';
+import fetchData from './api.js';
+import ItemElement from './helpers.js';
 import likesCounter from './likesCounter.js';
 
 const display = async () => {
@@ -11,7 +11,7 @@ const display = async () => {
     // Sort the data based on rating average in descending order
     data.sort((a, b) => b.rating.average - a.rating.average);
 
-    // Limit the data to the top 6 items
+    // Limit the data to the top 16 items
     const topItems = data.slice(0, 16);
 
     const itemsContainer = document.getElementById('items-container');
@@ -28,8 +28,16 @@ const display = async () => {
       span.textContent = `(${likesCounter()})`;
     });
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
+    const snackbar = document.getElementById('snackbar');
+    snackbar.className = 'show';
+    const text = document.createElement('span');
+
+    text.textContent = error;
+
+    snackbar.appendChild(text);
+    setTimeout(() => {
+      snackbar.className = snackbar.className.replace('show', '');
+    }, 5000);
   }
 };
 

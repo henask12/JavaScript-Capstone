@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/prefer-default-export
-export const postLikes = async (event) => {
+const postLikes = async (event) => {
   try {
     return await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/c26WXJgsOY60FiNtcTNS/likes', {
       method: 'POST',
@@ -14,3 +13,5 @@ export const postLikes = async (event) => {
     return error.message;
   }
 };
+
+export default postLikes;
