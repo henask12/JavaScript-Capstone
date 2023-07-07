@@ -3,7 +3,7 @@
 
 <div align="center">
 
-  <h3><b>Javascript Capstone-Project</b></h3>
+  <h3><b>Javascript Capstone-Project | MovieWorld</b></h3>
 
 </div>
 
@@ -30,10 +30,10 @@
 - [📝 License](#license)
 
 
-# 📖 [Capstone-Project] <a name="about-project"></a>
+# 📖 [MovieWorld] <a name="about-project"></a>
 
 
-**[Capstone-Project]** is an application that renders Tv Shows from TVMaze API and also has features like fetching and posting comments and Likes using the Involvment API. This is a collaborative project where we have applied all the skills obtained throughout the javascript module.
+**[MovieWorld]** is an application that renders Tv Shows from TVMaze API and also has features like fetching and posting comments and Likes using the Involvment API. This is a collaborative project where we have applied all the skills obtained throughout the javascript module.
 
 ## 🛠 Built With <a name="built-with"></a>
 
