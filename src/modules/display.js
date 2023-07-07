@@ -28,7 +28,16 @@ const display = async () => {
       span.textContent = `(${likesCounter()})`;
     });
   } catch (error) {
-    console.error(error);
+    const snackbar = document.getElementById('snackbar');
+    snackbar.className = 'show';
+    const text = document.createElement('span');
+
+    text.textContent = error;
+
+    snackbar.appendChild(text);
+    setTimeout(() => {
+      snackbar.className = snackbar.className.replace('show', '');
+    }, 5000);
   }
 };
 

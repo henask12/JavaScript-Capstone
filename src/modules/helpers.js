@@ -64,11 +64,29 @@ const ItemElement = async (item) => {
         let count = Number(span.textContent.replace('likes', ''));
         span.textContent = `${count += 1} likes`;
       } catch (error) {
-        console.error(error);
+        const snackbar = document.getElementById('snackbar');
+        snackbar.className = 'show';
+        const text = document.createElement('span');
+
+        text.textContent = error;
+
+        snackbar.appendChild(text);
+        setTimeout(() => {
+          snackbar.className = snackbar.className.replace('show', '');
+        }, 5000);
       }
     });
   } catch (error) {
-    console.error(error);
+    const snackbar = document.getElementById('snackbar');
+    snackbar.className = 'show';
+    const text = document.createElement('span');
+
+    text.textContent = error;
+
+    snackbar.appendChild(text);
+    setTimeout(() => {
+      snackbar.className = snackbar.className.replace('show', '');
+    }, 5000);
   }
 
   // Hide or remove the class from the loader element after 1 second

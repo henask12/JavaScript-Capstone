@@ -39,7 +39,16 @@ const saveComment = async (itemId, name, commentText) => {
       throw new Error('Failed to save comment');
     }
   } catch (error) {
-    console.error('Error saving comment:', error);
+    const snackbar = document.getElementById('snackbar');
+    snackbar.className = 'show';
+    const text = document.createElement('span');
+
+    text.textContent = `Error Saving: ${error}`;
+
+    snackbar.appendChild(text);
+    setTimeout(() => {
+      snackbar.className = snackbar.className.replace('show', '');
+    }, 5000);
     throw error;
   }
 };

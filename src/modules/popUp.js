@@ -1,7 +1,7 @@
-import displayComment from './displayComment.js';
-import saveComment from './saveComment.js';
 import fetchData from './api.js';
 import countComments from './commentsCounter.js';
+import saveComment from './saveComment.js';
+import displayComment from './displayComment.js';
 
 const createCommentForm = (itemId, commentsSection) => {
   const form = document.createElement('form');
@@ -36,11 +36,10 @@ const createCommentForm = (itemId, commentsSection) => {
 
     const name = nameInput.value;
     const commentText = commentInput.value;
-    // call saveComment function
     const savedComment = await saveComment(itemId, name, commentText);
     displayComment(savedComment, commentsSection);
 
-    showComments(itemId);
+    await showComments(itemId);
     commentInput.value = '';
     nameInput.value = '';
   });
@@ -171,7 +170,16 @@ const showComments = async (item) => {
 
       handlePagination();
     } else {
-      console.error('Error fetching comments:', data.error.message);
+      const snackbar = document.getElementById('snackbar');
+      snackbar.className = 'show';
+      const text = document.createElement('span');
+
+      text.textContent = data.error.message;
+
+      snackbar.appendChild(text);
+      setTimeout(() => {
+        snackbar.className = snackbar.className.replace('show', '');
+      }, 5000);
     }
 
     const commentForm = createCommentForm(item, commentsSection);
@@ -204,7 +212,16 @@ const showComments = async (item) => {
     popupContainer.appendChild(popupContent);
     document.body.appendChild(popupContainer);
   } catch (error) {
-    console.error('Error fetching comments:', error);
+    const snackbar = document.getElementById('snackbar');
+    snackbar.className = 'show';
+    const text = document.createElement('span');
+
+    text.textContent = error;
+
+    snackbar.appendChild(text);
+    setTimeout(() => {
+      snackbar.className = snackbar.className.replace('show', '');
+    }, 5000);
   }
 };
 
