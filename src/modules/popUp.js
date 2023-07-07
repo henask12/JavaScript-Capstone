@@ -1,7 +1,6 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-console */
 import countComments from './commentsCounter.js';
-
 import { fetchData } from './api.js';
 
 const createCommentForm = (itemId, commentsSection) => {
@@ -41,7 +40,24 @@ const createCommentForm = (itemId, commentsSection) => {
 
   return form;
 };
+const createCommentElement = (comment) => {
+  const commentElement = document.createElement('div');
+  commentElement.className = 'comment';
 
+  const usernameElement = document.createElement('span');
+  usernameElement.textContent = comment.username;
+  commentElement.appendChild(usernameElement);
+
+  const dateElement = document.createElement('span');
+  dateElement.textContent = comment.creation_date;
+  commentElement.appendChild(dateElement);
+
+  const commentTextElement = document.createElement('p');
+  commentTextElement.textContent = comment.comment;
+  commentElement.appendChild(commentTextElement);
+
+  return commentElement;
+};
 const displayComment = (comment, commentsSection) => {
   const commentElement = document.createElement('div');
 
@@ -76,37 +92,91 @@ const showComments = async (item) => {
   popupContent.appendChild(commentsSection);
 
   const commentsUrl = `https://api.tvmaze.com/shows/${item}`;
-  const commentData = `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/c26WXJgsOY60FiNtcTNS/comments?item_id=${parseInt(item, 10)}`;
+  const commentData = `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/c26WXJgsOY60FiNtcTNS/comments?item_id=${parseInt(
+    item,
+    10,
+  )}`;
+
+  const popupGrid = document.createElement('div');
+  popupGrid.classList.add('comments-section-grid');
+  popupContent.appendChild(popupGrid);
 
   try {
     const comments = await fetchData(commentsUrl);
-
     const data = await fetchData(commentData);
 
     const commentdata = document.createElement('div');
     commentdata.classList.add('comments-section-data');
-    popupContent.appendChild(commentdata);
+    popupGrid.appendChild(commentdata);
+
+    const pagCom = document.createElement('div');
+    pagCom.classList.add('pagination-comment');
+    popupContent.appendChild(pagCom);
+
+    // Add pagination controls
+    const paginationContainer = document.createElement('div');
+    paginationContainer.classList.add('pagination-container');
+    pagCom.appendChild(paginationContainer);
+
+    const previousButton = document.createElement('button');
+    previousButton.textContent = 'Previous';
+    previousButton.classList.add('pagination-button', 'previous-button');
+    paginationContainer.appendChild(previousButton);
+
+    const nextButton = document.createElement('button');
+    nextButton.textContent = 'Next';
+    nextButton.classList.add('pagination-button', 'next-button');
+    paginationContainer.appendChild(nextButton);
+
+    let currentPage = 1;
+    const commentsPerPage = 5;
 
     if (!data.error) {
-      data.forEach((comment) => {
-        const commentElement = createCommentElement(comment);
-        commentdata.appendChild(commentElement);
-      });
-
       const commentsCount = countComments(data);
 
       const commentsCountElement = document.createElement('span');
       commentsCountElement.textContent = `Total Comments: ${commentsCount}`;
       commentsCountElement.className = 'comment-counter';
-      popupContent.appendChild(commentsCountElement);
+
+      // Insert the commentsCountElement before the comments-section-grid
+      popupContent.insertBefore(commentsCountElement, popupGrid);
+
+      // popupContent.appendChild(commentsCountElement);
+
+      const commentElements = data.map(createCommentElement);
+      const totalPages = Math.ceil(commentElements.length / commentsPerPage);
+
+      const handlePagination = () => {
+        commentdata.innerHTML = '';
+        const startIndex = (currentPage - 1) * commentsPerPage;
+        const endIndex = startIndex + commentsPerPage;
+
+        for (let i = startIndex; i < endIndex && i < commentElements.length; i += 1) {
+          commentdata.appendChild(commentElements[i]);
+        }
+      };
+
+      previousButton.addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage -= 1;
+          handlePagination();
+        }
+      });
+
+      nextButton.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+          currentPage += 1;
+          handlePagination();
+        }
+      });
+
+      handlePagination();
     } else {
-    // Handle the error case, e.g., display an error message
       console.error('Error fetching comments:', data.error.message);
-    // You can choose to display an error message or handle the error in another way
     }
 
     const commentForm = createCommentForm(item, commentsSection);
-    popupContent.appendChild(commentForm);
+    popupGrid.appendChild(commentForm);
 
     const commentElement = document.createElement('div');
     commentElement.className = 'Movie-name';
@@ -137,24 +207,6 @@ const showComments = async (item) => {
   } catch (error) {
     console.error('Error fetching comments:', error);
   }
-  function createCommentElement(comment) {
-    const commentElement = document.createElement('div');
-    commentElement.className = 'comment';
-
-    const usernameElement = document.createElement('span');
-    usernameElement.textContent = comment.username;
-    commentElement.appendChild(usernameElement);
-
-    const dateElement = document.createElement('span');
-    dateElement.textContent = comment.creation_date;
-    commentElement.appendChild(dateElement);
-
-    const commentTextElement = document.createElement('p');
-    commentTextElement.textContent = comment.comment;
-    commentElement.appendChild(commentTextElement);
-
-    return commentElement;
-  }
 };
 
 const saveComment = async (itemId, name, commentText) => {
@@ -172,6 +224,24 @@ const saveComment = async (itemId, name, commentText) => {
       },
       body: JSON.stringify(commentData),
     });
+    if (response.ok) {
+      const inputName = document.querySelectorAll('.name-input');
+      const inputComment = document.querySelectorAll('.comment-input');
+
+      inputComment.forEach((input) => {
+        input.value = '';
+      });
+      inputName.forEach((input) => {
+        input.value = '';
+      });
+
+      // displayComment();
+      const snackbar = document.getElementById('snackbar');
+      snackbar.className = 'show';
+      setTimeout(() => {
+        snackbar.className = snackbar.className.replace('show', '');
+      }, 3000);
+    }
 
     if (!response.ok) {
       throw new Error('Failed to save comment');
