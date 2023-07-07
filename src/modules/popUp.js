@@ -1,11 +1,12 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable no-console */
+import displayComment from './displayComment.js';
+import saveComment from './saveComment.js';
+import fetchData from './api.js';
 import countComments from './commentsCounter.js';
-import { fetchData } from './api.js';
 
 const createCommentForm = (itemId, commentsSection) => {
   const form = document.createElement('form');
   form.className = 'comment-form';
+  form.setAttribute('id', 'formId');
 
   const formTitle = document.createElement('h2');
   formTitle.textContent = 'Add Your Comment';
@@ -26,21 +27,27 @@ const createCommentForm = (itemId, commentsSection) => {
   submitButton.type = 'submit';
   submitButton.textContent = 'Comment';
   submitButton.className = 'submit-button';
+  submitButton.setAttribute('id', 'btn-from');
   form.appendChild(submitButton);
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
+    // get the name from input value and put here
 
     const name = nameInput.value;
     const commentText = commentInput.value;
+    // call saveComment function
     const savedComment = await saveComment(itemId, name, commentText);
     displayComment(savedComment, commentsSection);
+
+    showComments(itemId);
     commentInput.value = '';
     nameInput.value = '';
   });
 
   return form;
 };
+
 const createCommentElement = (comment) => {
   const commentElement = document.createElement('div');
   commentElement.className = 'comment';
@@ -58,19 +65,6 @@ const createCommentElement = (comment) => {
   commentElement.appendChild(commentTextElement);
 
   return commentElement;
-};
-const displayComment = (comment, commentsSection) => {
-  const commentElement = document.createElement('div');
-
-  const usernameElement = document.createElement('strong');
-  usernameElement.textContent = comment?.username;
-  commentElement.appendChild(usernameElement);
-
-  const textElement = document.createElement('p');
-  textElement.textContent = comment?.comment;
-  commentElement.appendChild(textElement);
-
-  commentsSection.appendChild(commentElement);
 };
 
 const showComments = async (item) => {
@@ -211,57 +205,6 @@ const showComments = async (item) => {
     document.body.appendChild(popupContainer);
   } catch (error) {
     console.error('Error fetching comments:', error);
-  }
-};
-
-const saveComment = async (itemId, name, commentText) => {
-  const commentData = {
-    item_id: itemId,
-    username: name,
-    comment: commentText,
-  };
-
-  try {
-    const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/c26WXJgsOY60FiNtcTNS/comments', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(commentData),
-    });
-
-    if (response.ok) {
-      const inputName = document.querySelectorAll('.name-input');
-      const inputComment = document.querySelectorAll('.comment-input');
-
-      inputComment.forEach((input) => {
-        input.value = '';
-      });
-      inputName.forEach((input) => {
-        input.value = '';
-      });
-
-      // displayComment();
-      const snackbar = document.getElementById('snackbar');
-      snackbar.className = 'show';
-      const text = document.createElement('span');
-
-      text.textContent = 'Comment SuccessFully Added!';
-
-      snackbar.appendChild(text);
-      setTimeout(() => {
-        snackbar.className = snackbar.className.replace('show', '');
-      }, 10000);
-      showComments(itemId);
-    } else if (!response.ok) {
-      throw new Error('Failed to save comment');
-    }
-
-    // const savedComment = await response.json();
-    // return savedComment;
-  } catch (error) {
-    console.error('Error saving comment:', error);
-    throw error;
   }
 };
 

@@ -1,13 +1,8 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/prefer-default-export */
-
-import { fetchData } from './api.js';
 import showComments from './popUp.js';
-import { fetchLikes } from './fetchLikes.js';
-import { postLikes } from './postLikes.js';
+import fetchLikes from './fetchLikes.js';
+import postLikes from './postLikes.js';
 
-export const ItemElement = async (item) => {
+const ItemElement = async (item) => {
   const itemElement = document.createElement('div');
   itemElement.className = 'item';
 
@@ -86,3 +81,5 @@ export const ItemElement = async (item) => {
   }
   return itemElement;
 };
+
+export default ItemElement;
