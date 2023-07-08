@@ -169,7 +169,12 @@ You can deploy this project using:
 
 - [ ] **[Functionality]**
 - [ ] **[Content]**
-
+- [ ] **[HomePage-to-Display-List-of-TvShows]**
+- [ ] **[Like-button-for-TvShows]**
+- [ ] **[Pop up screen]**
+- [ ] **[adding a comment form]**
+- [ ] **[displaying comments ]**
+- [ ] **[next and prev button for comment section]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
